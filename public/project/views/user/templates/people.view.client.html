@@ -1,0 +1,102 @@
+<div class="navbar-wrapper">
+    <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Athenaeum</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li class="dropdown">
+                            <a href="/user/{{model.userId}}/people/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user/:userId/people/#">Discussions</a></li>
+                                <li><a href="/user/:userId/people/#">Ask the Author</a></li>
+                                <li><a href="#!/user/{{model.userId}}/people/#">People</a></li>
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--<li class="dropdown-header">Nav header</li>-->
+                                <!--<li><a href="#">Separated link</a></li>-->
+                                <!--<li><a href="#">One more separated link</a></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="col-sm-3 col-md-3 navbar-right">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for Book Titles..." name="q" ng-model="title">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" ng-click="model.redirect(title)"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container marketing">
+        <div class="container-fluid">
+            <h1>People</h1>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="user in model.users">
+                    {{user.username}}
+                    <button class="btn btn-danger" ng-click="model.followUser(user.username)">Follow</button>
+                </li>
+            </ul>
+            <!--<div class="row">-->
+
+                <!--<div class="col-xs-4">-->
+                    <!--&lt;!&ndash;<H1 style="color: silver">Search Books</H1>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input ng-model="title" type="search" placeholder="What are you looking for?" class="form-control">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<br/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<button ng-click="model.searchBook(title)" class="btn btn-primary btn-block">Search</button>&ndash;&gt;-->
+                    <!--<h1>Results</h1>-->
+                    <!--<ul class="list-group">-->
+                        <!--<li ng-click="model.book=book" ng-repeat="book in model.books" class="list-group-item">-->
+                            <!--<img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" width="50px"/>-->
+                            <!--{{book.volumeInfo.title}}-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="col-xs-8">-->
+                    <!--<h1>Details</h1>-->
+                    <!--<h2> {{model.book.volumeInfo.title}} <i class="fa fa-bookmark" aria-hidden="true" ng-click="model.bookmark(model.book.volumeInfo.title)"></i></h2>-->
+                    <!--<img ng-src="{{model.book.volumeInfo.imageLinks.smallThumbnail}}" width="200px" height="250px"/>-->
+                    <!--<h3>Author</h3>-->
+                    <!--<p>{{model.book.volumeInfo.authors[0]}}</p>-->
+                    <!--<h3>Description</h3>-->
+                    <!--<p>{{model.book.volumeInfo.description}}</p>-->
+                    <!--<h3>Average Rating</h3>-->
+                    <!--<p>{{model.book.volumeInfo.averageRating}}</p>-->
+
+                <!--</div>-->
+            <!--</div>-->
+            <!--<section class="webdesigntuts-workshop">-->
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!--<div class="navbar-wrapper">-->
+        <!--<div class="container">-->
+        <nav class="navbar navbar-inverse navbar-fixed-bottom" >
+            <div class="container">
+                <a class="navbar-brand pull-right" href="#!/user/{{model.userId}}"><span
+                        class="glyphicon glyphicon-user"></span></a>
+            </div>
+        </nav>
+
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>

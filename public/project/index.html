@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WAM">
+
+<head>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular/angular-route.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <!--<script src="vendor/xml2js/lib/xml2js.js"></script>-->
+
+    <!-- user -->
+    <script src="views/user/controllers/login.controller.view.js"></script>
+    <script src="views/user/controllers/profile.controller.view.js"></script>
+    <script src="views/user/controllers/register.controller.view.js"></script>
+    <script src="views/user/controllers/search.controller.view.js"></script>
+    <script src="views/user/controllers/people.controller.view.js"></script>
+    <script src="views/user/controllers/bestsellers.controller.view.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/search.service.client.js"></script>
+    <script src="services/bestsellers.service.client.js"></script>
+    <!-- website -->
+    <!--<script src="views/website/controllers/website-list.controller.client.js"></script>-->
+    <!--<script src="views/website/controllers/website-edit.controller.client.js"></script>-->
+    <!--<script src="views/website/controllers/website-new.controller.client.js"></script>-->
+    <!--<script src="services/website.service.client.js"></script>-->
+
+    <!--<script src="views/page/controllers/page-list.controller.view.js"></script>-->
+    <!--<script src="views/page/controllers/page-edit.controller.view.js"></script>-->
+    <!--<script src="views/page/controllers/page-new.controller.view.js"></script>-->
+    <!--<script src="services/page.service.client.js"></script>-->
+    <!--&lt;!&ndash; TBD &ndash;&gt;-->
+
+    <!--&lt;!&ndash;widgets&ndash;&gt;-->
+    <!--<script src="views/widget/controllers/widget-list.controller.client.js"></script>-->
+    <!--<script src="views/widget/controllers/widget-edit.controller.client.js"></script>-->
+    <!--<script src="views/widget/controllers/widget-choose.controller.client.js"></script>-->
+    <!--<script src="services/widget.service.client.js"></script>-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Athenaeum</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../project/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../project/vendor/bootstrap-social/bootstrap-social.less" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../project/vendor/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+    <!--<link href="../public/project/vendor/theme.css" rel="stylesheet">-->
+
+    <!-- Custom styles for this template -->
+    <link href="../project/css/carousel.css" rel="stylesheet">
+    <!-- Text Angular css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.16/textAngular.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div ng-view>
+
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--<script src="../../assets/js/docs.min.js"></script>-->
+</body>
+</html>

@@ -1,0 +1,95 @@
+<div class="navbar-wrapper">
+    <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Athenaeum</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li class="dropdown">
+                            <a href="/user/{{model.userId}}/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user/:userId/#">Discussions</a></li>
+                                <li><a href="/user/:userId/#">Ask the Author</a></li>
+                                <li><a href="#!/user/{{model.userId}}/people">People</a></li>
+                                <!--<li role="separator" class="divider"></li>-->
+                                <!--<li class="dropdown-header">Nav header</li>-->
+                                <!--<li><a href="#">Separated link</a></li>-->
+                                <!--<li><a href="#">One more separated link</a></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="col-sm-3 col-md-3 navbar-right">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for Book Titles..." name="q" ng-model="title">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" ng-click="model.redirect(title)"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+<div class="container marketing">
+    <div class="container-fluid">
+
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter an email...">
+            </div>
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
+            </div>
+        </form>
+        <hr/>
+        <label>Bookmarked</label>
+        <ul class="list-group">
+                <li ng-repeat="bm in model.user.bookmarkedBooks" class="list-group-item">
+                    {{bm}}
+                </li>
+        </ul>
+        <label>Following</label>
+        <ul class="list-group">
+            <li ng-repeat="follows in model.user.follows" class="list-group-item">
+                {{follows}}
+            </li>
+        </ul>
+        <label>Followed By</label>
+        <ul class="list-group">
+            <li ng-repeat="followed in model.user.followedBy" class="list-group-item">
+                {{followed}}
+            </li>
+        </ul>
+        <a class="btn btn-primary"
+           href="#!/user/{{model.userId}}/website">Websites</a>
+        <a class="btn btn-danger"
+           href="#!/login">Logout</a>
+    </div>
+</div>
+</div>
+<!--<div ng-include="'views/common/footer.view.client.html'"></div>-->

@@ -1,0 +1,21 @@
+{
+  "name": "web-dev",
+  "version": "1.0.0",
+  "description": "Web Dev at Northeastern University",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "bootstrap-social": "^5.1.1",
+    "express": "^4.15.3",
+    "goodreads": "^0.1.0",
+    "mongoose": "^4.11.5",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Jose G. Annunziato",
+  "license": "ISC"
+}
