@@ -8,6 +8,7 @@
     "bootstrap-social": "^5.1.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "express-session": "^1.15.5",
     "goodreads": "^0.1.0",
     "mongoose": "^4.11.5",
     "multer": "^1.3.0",
