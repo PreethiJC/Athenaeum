@@ -52,6 +52,5 @@
                 controller: 'peopleController',
                 controllerAs: 'model'
             })
-
     }
 })();
