@@ -4,7 +4,7 @@ module.exports = function(app)
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
 
-    var connectionString = 'mongodb://127.0.0.1:27017/test';
+    var connectionString = 'mongodb://127.0.0.1:27017/athenaeum';
 
     if(process.env.USER_MLAB) {
  //      connectionString = process.env.MLAB_USERNAME + ":" +

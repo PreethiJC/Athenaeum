@@ -10,7 +10,10 @@ body {
 }
 
 @import url(https://fonts.googleapis.com/css?family=Cabin:400);
-
+.panel
+{
+    background-color: gray;
+}
 .webdesigntuts-workshop {
     background: #151515;
     height: 100%;

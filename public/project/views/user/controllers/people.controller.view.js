@@ -21,7 +21,7 @@
         }
         function init() {
             model.users = userService.findAllUsers(model.userId);
-            console.log(model.users);
+            // console.log(model.users);
         }
         init();
 

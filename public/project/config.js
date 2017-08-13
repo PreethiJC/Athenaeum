@@ -27,9 +27,9 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/user/',{
-                templateUrl: 'views/user/templates/home.view.client.html',
-                controller: 'bestSellerController',
+            .when('/user/', {
+                templateUrl: 'views/user/templates/profile.view.client.html',
+                controller: 'profileController',
                 controllerAs: 'model'
             })
             .when('/user/:userId', {

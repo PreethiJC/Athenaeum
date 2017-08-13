@@ -37,11 +37,17 @@
             if (typeof(model.userId) === 'undefined')
                 alert('Please login to bookmark.');
             else {
-                var user = userService.findUserById(model.userId);
-                user.bookmarkedBooks.push(title);
                 userService
-                    .updateUser(model.userId, user);
-                alert("Bookmarked");
+                    .findUserById(model.userId)
+                    .then(function (user) {
+                        user.bookmarked.push(title);
+                        userService.updateUser(model.userId, user)
+                            .then(function () {
+                                alert("Bookmarked");
+                            })
+
+                    })
+
             }
         }
 
