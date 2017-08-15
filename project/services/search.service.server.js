@@ -41,8 +41,8 @@ module.exports = function (app) {
     };
 
 
-    app.get('/api/project/user/:userId', isAdminOrUser, findUserById);
-    app.get('/api/project/user', isAdminOrUser, findAllUsers);
+    app.get('/api/project/user/:userId', findUserById);
+    app.get('/api/project/user', findAllUsers);
     app.post('/api/project/user', isAdmin, createUser);
     app.put('/api/project/user/:userId', updateUser);
     app.delete('/api/project/user/:userId', isAdminOrUser, deleteUser);

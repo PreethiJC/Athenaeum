@@ -14,6 +14,8 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.addBookmark = addBookmark;
+userModel.addToBookshelf = addToBookshelf;
+userModel.removeFromBookshelf = removeFromBookshelf;
 userModel.deleteBookmark = deleteBookmark;
 userModel.addFollowing = addFollowing;
 userModel.deleteFollowing = deleteFollowing;
@@ -55,11 +57,32 @@ function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id': googleId});
 }
 
-function addBookmark(userId, bookMarkName) {
+function addBookmark(userId, volId, bookName) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            user.bookmarked.push(bookMarkName);
+            var bm = {volId: volId, bookName: bookName};
+            user.bookmarked.push(bm);
+            return user.save();
+        });
+}
+
+function addToBookshelf(userId, bookName, volId, bookName) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var book = {volId: volId, bookName: bookName};
+            user.bookshelf.push(book);
+            return user.save();
+        });
+}
+
+function removeFromBookshelf(userId, bookName) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.bookshelf.indexOf(bookName);
+            user.bookshelf.splice(index, 1);
             return user.save();
         });
 }

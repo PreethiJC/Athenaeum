@@ -19,18 +19,14 @@
                     // console.log(response.data);
                     return response.data;
                 });
-            // var url = "/api/project/book/"+title;
-            // return $http.get(url)
-            //     .then(function (response) {
-            //         return response.data;
-            //     });
         }
 
         function searchBookByID(id) {
-            var url = "https://www.goodreads.com/book/show/" + id + ".xml?key=T3XmyOG438rZNaDB6kTcHQ";
+            var url = "https://www.googleapis.com/books/v1/volumes/" +id;
             return $http.get(url)
                 .then(function (response) {
-                    console.log(response)
+                    // console.log(response.data);
+                    return response.data;
                 });
         }
     }

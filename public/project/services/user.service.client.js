@@ -13,6 +13,7 @@
             updateUser: updateUser,
             unfollow:unfollow,
             deleteBookmark: deleteBookmark,
+            deleteFromBookshelf:deleteFromBookshelf,
             findAllUsers:findAllUsers,
             verifyAdmin:verifyAdmin,
             login: login,
@@ -55,6 +56,18 @@
             return $http.post(url, credentials)
                 .then(function (response) {
                     return response.data;
+                });
+        }
+
+        function deleteFromBookshelf(userId, title) {
+            var url = '/api/project/user/' + userId;
+            var user;
+            return $http.get(url)
+                .then(function (response) {
+                    user = response.data;
+                    var index = user.bookshelf.indexOf(title);
+                    user.bookshelf.splice(index, 1);
+                    updateUser(userId, user);
                 });
         }
 

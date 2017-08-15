@@ -11,17 +11,35 @@
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
         model.logout = logout;
-        model.redirect = redirect;
+        model.redirectSearch = redirectSearch;
         model.deleteBookmark = deleteBookmark;
         model.unfollow = unfollow;
+        model.deleteFromBookshelf = deleteFromBookshelf;
+        model.redirectPeople = redirectPeople;
 
-        function redirect(title) {
+        function redirectPeople() {
+            if (typeof(model.userId) === 'undefined')
+                $location.url('/user/people');
+            else
+                $location.url('/user/' + model.userId + '/people/')
+        }
+
+        function redirectSearch(title) {
             if (typeof(model.userId) === 'undefined')
                 $location.url('/search/' + title);
             else
                 $location.url('/user/' + model.userId + '/search/' +title)
         }
         function init() {
+            if (typeof(model.userId) === 'undefined')
+                model.admin = -1;
+            else {
+                userService
+                    .findUserById(model.userId)
+                    .then(function (user) {
+                        model.admin = user.roles.indexOf("ADMIN");
+                    })
+            }
             userService
                 .findUserById(model.userId)
                 .then(renderUser, userError);
@@ -43,6 +61,16 @@
                 .updateUser(user._id, user)
                 .then(function () {
                     model.message = "User update was successful";
+                })
+        }
+
+        function deleteFromBookshelf(title)
+        {
+            userService
+                .deleteFromBookshelf(model.userId, title)
+                .then(function () {
+                    init();
+                    model.message = "Book Removed from Bookshelf";
                 })
         }
 

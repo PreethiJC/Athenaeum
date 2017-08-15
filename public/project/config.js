@@ -65,16 +65,20 @@
                 controller: 'searchController',
                 controllerAs: 'model'
             })
+            .when('/user/:userId/details/:volumeId', {
+                templateUrl: 'views/user/templates/details.view.client.html',
+                controller: 'detailsController',
+                controllerAs: 'model'
+            })
             .when('/user/:userId/people/', {
                 templateUrl: 'views/user/templates/people.view.client.html',
                 controller: 'peopleController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId/discussion/', {
-                templateUrl: 'views/user/templates/discussion-create.view.client.html',
-                controller: 'discussionController',
+            .when('/user/people/', {
+                templateUrl: 'views/user/templates/people.view.client.html',
+                controller: 'peopleController',
                 controllerAs: 'model'
-
             });
 
         function verifyAdmin(userService, $q, $location) {

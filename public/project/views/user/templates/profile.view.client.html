@@ -17,11 +17,9 @@
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#!/admin">Admin</a></li>
                         <li class="dropdown">
-                            <a href="/user/{{model.userId}}/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#!/user/:userId/#">Discussions</a></li>
-                                <li><a href="#!/user/:userId/#">Ask the Author</a></li>
-                                <li><a href="#!/user/{{model.userId}}/people">People</a></li>
+                                <li><a ng-click="model.redirectPeople()">People</a></li>
                                 <!--<li role="separator" class="divider"></li>-->
                                 <!--<li class="dropdown-header">Nav header</li>-->
                                 <!--<li><a href="#">Separated link</a></li>-->
@@ -34,7 +32,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for Book Titles..." name="q" ng-model="title">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit" ng-click="model.redirect(title)"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default" type="submit" ng-click="model.redirectSearch(title)"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
                             </div>
                         </form>
@@ -55,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter an email...">
+                <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="Enter an email...">
             </div>
             <div class="form-group">
                 <label for="first-name">First Name</label>
@@ -70,9 +68,16 @@
         <label>Bookmarked</label>
         <ul class="list-group">
                 <li ng-repeat="bm in model.user.bookmarked" class="list-group-item">
-                    {{bm}} <a ng-click="model.deleteBookmark(bm)" class="glyphicon glyphicon-remove pull-right"></a>
+                    <a href="#!/user/{{model.user._id}}/details/{{bm.volId}}">{{bm.bookName}}</a> <a ng-click="model.deleteBookmark(bm)" class="glyphicon glyphicon-remove pull-right"></a>
                 </li>
         </ul>
+        <label>Bookshelf</label>
+        <ul class="list-group">
+            <li ng-repeat="book in model.user.bookshelf" class="list-group-item">
+                <a href="#!/user/{{model.user._id}}/details/{{book.volId}}">{{book.bookName}}</a> <a ng-click="model.deleteFromBookshelf(book)" class="glyphicon glyphicon-remove pull-right"></a>
+            </li>
+        </ul>
+        <hr/>
         <label>Following</label>
         <ul class="list-group">
             <li ng-repeat="follows in model.user.following" class="list-group-item">

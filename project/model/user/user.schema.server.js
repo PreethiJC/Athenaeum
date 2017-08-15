@@ -10,10 +10,11 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     roles: [{type: String, enum: ['USER', 'ADMIN', 'AUTHOR'], default: 'USER'}],
-    bookmarked: Array,
-    following: {type: Array},
+    bookmarked: [{volId: String, bookName:String}],
+    following: [{volId: String, bookName:String}],
     followedBy: {type: Array},
     dateCreated: {type: Date, default: Date.now},
+    bookshelf: Array,
     google: {
         id:    String,
         token: String

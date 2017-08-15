@@ -14,14 +14,11 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a ng-if="model.admin > -1">Admin</a></li>
                         <li class="dropdown">
-                            <a href="/search/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/search/#">Discussions</a></li>
-                                <li><a href="/search/#">Ask the Author</a></li>
-                                <li><a href="/search/#">People</a></li>
+                                <li><a ng-click="model.redirectPeople()">People</a></li>
                                 <!--<li role="separator" class="divider"></li>-->
                                 <!--<li class="dropdown-header">Nav header</li>-->
                                 <!--<li><a href="#">Separated link</a></li>-->
@@ -34,7 +31,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for Book Titles..." name="q" ng-model="title">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit" ng-click="model.redirect(title)"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default" type="submit" ng-click="model.redirectSearch(title)"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
                             </div>
                         </form>
@@ -45,22 +42,17 @@
     </div>
     <div class="container marketing">
         <div class="container-fluid">
-            <h1>Discussions</h1>
-
-                <ul class="list-group">
-                    <li ng-click="model.book=book" ng-repeat="book in model.books" class="list-group-item">
-                        <img ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" width="50px"/>
-                        {{book.volumeInfo.title}}
-                    </li>
-                </ul>
-                </div>
-            </div>
-            <!--<section class="webdesigntuts-workshop">-->
-
+            <h1>Details</h1>
+            <h2> {{model.book.volumeInfo.title}} <div class="pull-right"><i class="fa fa-bookmark" aria-hidden="true" ng-click="model.bookmark(model.book.volumeInfo.title)"></i> <i class="fa fa-plus" ng-click="model.addBookshelf(model.book.volumeInfo.title)"></i></div></h2>
+            <img ng-src="{{model.book.volumeInfo.imageLinks.thumbnail}}"/>
+            <h3>Author</h3>
+            <p>{{model.book.volumeInfo.authors[0]}}</p>
+            <h3>Description</h3>
+            <p>{{model.book.volumeInfo.description}}</p>
+            <h3>Average Rating</h3>
+            <p>{{model.book.volumeInfo.averageRating}}</p>
         </div>
     </div>
-
-
     <div class="container">
         <!--<div class="navbar-wrapper">-->
         <!--<div class="container">-->
@@ -75,4 +67,3 @@
         <!--</div>-->
     </div>
 </div>
-<!--</section>-->

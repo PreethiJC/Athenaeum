@@ -6,39 +6,17 @@
         .module('WAM')
         .controller('bestSellerController', bestSellerController);
 
-    function bestSellerController($location, bestSellerService){
+    function bestSellerController($location){
         var model = this;
-        model.redirect = redirect;
-        function redirect(title) {
+        model.redirectSearch = redirectSearch;
+        model.redirectPeople = redirectPeople;
+
+        function redirectPeople() {
+            $location.url('/user/people');
+        }
+
+        function redirectSearch(title) {
             $location.url('/search/' + title);
         }
-        // model.getBestSeller = getBestSeller;
-        // model.searchBookByID = searchBookByID;
-        // function init()
-        // {
-        //     res = getBestSeller();
-        //
-        // }
-        // init();
-        // function getBestSeller() {
-        //     bestSellerService
-        //         .getBestSeller()
-        //         .then(function (result) {
-        //             // return result
-        //             // console.log(result)
-        //             model.bestSellers = result.items;
-        //             // model.bookImg = result.items[0].volumeInfo.imageLinks.smallThumbnail;
-        //             // model.title = result.items[0].volumeInfo.title;
-        //             // model.author = result.items[0].volumeInfo.authors[0];
-        //         })
-        // }
-        //
-        // function searchBookByID(id) {
-        //     searchService
-        //         .searchBookByID(id)
-        //         .then(function (result) {
-        //             console.log(result);
-        //         })
-        // }
     }
 })();

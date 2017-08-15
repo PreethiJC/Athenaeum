@@ -10,10 +10,18 @@
         var model = this;
         model.title = $routeParams['title'];
         model.userId = $routeParams['userId'];
-        model.redirect = redirect;
+        model.redirectSearch = redirectSearch;
         model.followUser = followUser;
+        model.redirectPeople = redirectPeople;
 
-        function redirect(title) {
+        function redirectPeople() {
+            if (typeof(model.userId) === 'undefined')
+                $location.url('/user/people');
+            else
+                $location.url('/user/' + model.userId + '/people/')
+        }
+
+        function redirectSearch(title) {
             if (typeof(model.userId) === 'undefined')
                 $location.url('/search/' + title);
             else
@@ -52,17 +60,7 @@
                             userService
                                     .updateUser(leader._id, leader);
                         }
-                    })
-                    // userService.findUserByUsername(username).then(function (leader) {
-                    //     console.log(leader);
-                    //     leader.followedBy.push(follower.username);
-                    //     userService
-                    //         .updateUser(leader._id, leader);
-                    // });
-
-
-
-
+                    });
                     alert("You are now following " + username);
                 })
                 }
