@@ -11,6 +11,10 @@
             findUserByCredentials: findUserByCredentials,
             deleteUser: deleteUser,
             updateUser: updateUser,
+            unfollow:unfollow,
+            deleteBookmark: deleteBookmark,
+            findAllUsers:findAllUsers,
+            verifyAdmin:verifyAdmin,
             login: login,
             logout: logout,
             loggedin: loggedin,
@@ -54,6 +58,32 @@
                 });
         }
 
+        function deleteBookmark(userId, title) {
+            var url = '/api/project/user/' + userId;
+            var user;
+            return $http.get(url)
+                .then(function (response) {
+                    user = response.data;
+                    var index = user.bookmarked.indexOf(title);
+                    user.bookmarked.splice(index, 1);
+                    updateUser(userId, user);
+                });
+
+
+        }
+        function unfollow(userId, username)
+        {
+            var url = '/api/project/user/' + userId;
+            var user;
+            return $http.get(url)
+                .then(function (response) {
+                    user = response.data;
+                    var index = user.following.indexOf(username);
+                    user.following.splice(index, 1);
+                    updateUser(userId, user);
+                });
+        }
+
         function deleteUser(userId) {
             var url = "/api/project/user/"+userId;
             return $http.delete(url)
@@ -71,10 +101,11 @@
         }
 
         function createUser(user) {
-            console.log(user);
+            // console.log(user);
             var url = "/api/project/user";
             return $http.post(url, user)
                 .then(function (response) {
+                    // console.log(response);
                     return response.data;
                 });
             // user._id = (new Date()).getTime() + "";
@@ -84,9 +115,10 @@
         }
 
         function findUserByUsername(username) {
-            var url = "/api/project/user?username="+username;
+            var url = "/api/project/user/username/"+username;
             return $http.get(url)
                 .then(function (response) {
+                    console.log(response.data);
                     return response.data;
                 });
             // var user = users.find(function (user) {
@@ -108,11 +140,36 @@
 
         function findUserByCredentials(username, password) {
             var url = "/api/project/user?username="+username+"&password="+password;
-            console.log('Hello');
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function findAllUsers(userId) {
+            var url = '/api/project/user';
+            return $http.get(url)
+                .then(function (response) {
+                    var users = response.data;
+                    var uIDs = [];
+                    // var users = response.data;
+                    users.forEach(function (u) {
+                        if (u._id !== userId) {
+                            uIDs.push(u);
+                        }
+                    });
+                    // console.log(uIDs);
+                    return uIDs;
+                    });
+        }
+
+        function verifyAdmin() {
+            var url = '/api/project/verifyAdmin';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+
         }
     }
 })();

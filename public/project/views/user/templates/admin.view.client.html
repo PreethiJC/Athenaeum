@@ -1,0 +1,105 @@
+<div class="navbar-wrapper">
+    <div class="container">
+
+        <nav class="navbar navbar-custom navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#!/user/{{model.admin._id}}">Athenaeum <small>A book a day keeps reality away</small></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container marketing">
+        <div class="container-fluid">
+            <div class="container-fluid main-container">
+                <div class="col-md-2 sidebar">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#">Edit Users</a></li>
+                        <li><a href="#!/admin/create">Create User</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-10 content">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            Show/Update/Remove Users
+                        </div>
+                        <div class="panel-body">
+                            <div ng-show="model.message" id="message">
+                                {{model.message}}
+                            </div>
+                            <div ng-show="model.error" id="error">
+                                <strong>{{model.error}}</strong></div>
+                            <div ng-repeat="user in model.users"
+                            class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <h4><strong>{{user.firstName}} {{user.lastName}}</strong></h4>
+                                        <p><strong>Username :</strong> {{user.username}}
+                                        </p>
+                                        <p>
+                                            <strong>Email :</strong> {{user.email}}
+                                        </p>
+                                    </div>
+                                <div class="col-xs-4">
+                                    <form id="{{user._id +'_form'}}" >
+                                        <div class="form-group form-check checkbox lead">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" id="{{user._id +'_ADMIN'}}"
+                                                       ng-checked="user.roles.indexOf('ADMIN') !== -1" id=""
+                                                       class="form-check-input">Admin
+                                            </label>
+                                        </div>
+                                        <div class="form-group form-check checkbox lead">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" id="{{user._id +'_USER'}}"
+                                                       ng-checked="user.roles.indexOf('USER') !== -1" class="form-check-input">
+                                                User
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-xs-2">
+                                    <button type="submit" ng-click="model.updateProfile(user)"
+                                            class="btn btn-success btn-transparent custom-button">
+                                        <strong>
+                                            <span class="glyphicon glyphicon-ok "></span>
+                                        </strong>
+                                    </button>
+                                    <button type="submit" ng-click="model.deleteProfile(user)"
+                                            class="btn btn-danger btn-transparent custom-button">
+                                        <strong>
+                                            <span class="glyphicon glyphicon-trash "></span>
+                                        </strong>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row hidden-xs">
+                                <div class="col-xs-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+        <!--</uib-tab>-->
+        <!--<uib-tab id="user" index="1" heading="Add User" ng-click="model.reset()">-->
+            <!--<div ng-include="'views/admin/templates/user-create.view.client.html'">-->
+            <!--</div>-->
+        <!--</uib-tab>-->
+</div>
+        <!--</uib-tab>-->
+    <!--</uib-tabset>-->
+
+<!--</div>-->
+
+<!--<div ng-include="'views/common/footer.view.client.html'"></div>-->

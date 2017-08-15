@@ -6,6 +6,24 @@
     function configuration($routeProvider) {
 
         $routeProvider
+            .when('/admin', {
+                templateUrl: 'views/user/templates/admin.view.client.html',
+                controller: 'AdminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: verifyAdmin
+                }
+
+            })
+            .when('/admin/create', {
+                templateUrl: 'views/user/templates/user-create.view.client.html',
+                controller: 'AdminController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: verifyAdmin
+                }
+
+            })
             .when('/', {
                 templateUrl: 'views/user/templates/home.view.client.html',
                 controller: 'bestSellerController',
@@ -52,5 +70,23 @@
                 controller: 'peopleController',
                 controllerAs: 'model'
             })
+            .when('/user/:userId/discussion/', {
+                templateUrl: 'views/user/templates/discussion-create.view.client.html',
+                controller: 'discussionController',
+                controllerAs: 'model'
+
+            });
+
+        function verifyAdmin(userService, $q, $location) {
+            var deferred = $q.defer();
+            userService.verifyAdmin()
+                .then(function (user) {
+                    deferred.resolve(user);
+                }, function () {
+                    deferred.reject();
+                    $location.url('/');
+                });
+            return deferred.promise;
+        }
     }
 })();

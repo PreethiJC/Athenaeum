@@ -41,17 +41,17 @@ module.exports = function (app) {
     };
 
 
-    app.get('/api/project/user/:userId', findUserById);
-    app.get('/api/project/user', findAllUsers);
-    app.post('/api/project/user', createUser);
+    app.get('/api/project/user/:userId', isAdminOrUser, findUserById);
+    app.get('/api/project/user', isAdminOrUser, findAllUsers);
+    app.post('/api/project/user', isAdmin, createUser);
     app.put('/api/project/user/:userId', updateUser);
-    app.delete('/api/project/user/:userId', deleteUser);
-
+    app.delete('/api/project/user/:userId', isAdminOrUser, deleteUser);
+    app.get('/api/project/verifyAdmin', verifyAdmin);
+    app.get('/api/project/user/username/:userName', findUserByUsername);
 
 
     app.post('/api/project/login', passport.authenticate('local'), login);
     app.get('/api/project/loggedin', loggedin);
-    app.get('/api/project/loggedin/profileid', getProfileId);
     app.get('/api/project/logout', logout);
     app.post('/api/project/user', register);
     app.get('/auth/project/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
@@ -63,9 +63,10 @@ module.exports = function (app) {
 
     app.get('/auth/project/google/callback',
         passport.authenticate('google', {
-            successRedirect: '/project/#!/user',
             failureRedirect: '/project/login'
-        }));
+        }), function (req, res) {
+            res.redirect('/project/#!/user/' + req.user._id);
+        });
 
     function register(req, res) {
         var userObj = req.body;
@@ -78,16 +79,11 @@ module.exports = function (app) {
                     });
             });
     }
-
     function logout(req, res) {
         req.logout();
         res.sendStatus(200);
     }
 
-    function getProfileId() {
-
-
-    }
     function loggedin(req, res) {
         if (req.isAuthenticated()) {
 
@@ -99,7 +95,6 @@ module.exports = function (app) {
 
 
     function localStrategy(username, password, done) {
-        console.log(password);
         userModel
             .findUserByCredentials(username)
             .then(function (user) {
@@ -138,12 +133,14 @@ module.exports = function (app) {
     function createUser(req, res) {
 
         var user = req.body;
+        user.roles = ['USER'];
         user.password = bcrypt.hashSync(user.password);
         userModel
             .createUser(user)
             .then(function (user) {
                 res.json(user);
             }, function (err) {
+                console.log(err);
                 res.send(err);
             });
     }
@@ -157,6 +154,16 @@ module.exports = function (app) {
                 res.json(user);
             });
 
+    }
+
+    function findUserByUsername(req, res) {
+        var userName = req.params['userName'];
+
+        userModel
+            .findUserByUsername(userName)
+            .then(function (user) {
+                res.json(user);
+            });
     }
 
     function findAllUsers(req, res) {
@@ -244,6 +251,39 @@ module.exports = function (app) {
                     if (err) { return done(err); }
                 }
             );
+    }
+
+    function isAdmin(req, res, next) {
+        if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') !== -1) {
+            next();
+        }
+        else {
+            res.sendStatus(401);
+        }
+
+    }
+
+    function isAdminOrUser(req, res, next) {
+        if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') !== -1) {
+            next();
+        }
+        else if (req.isAuthenticated() && req.user._id.toString() === req.params.userId) {
+            next();
+        }
+        else {
+            res.sendStatus(401);
+        }
+
+    }
+
+    function verifyAdmin(req, res) {
+        if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') !== -1) {
+            res.json(req.user);
+        }
+        else {
+            res.sendStatus(401);
+        }
+
     }
 
 };

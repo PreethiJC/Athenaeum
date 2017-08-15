@@ -19,8 +19,18 @@
             else
                 $location.url('/user/' + model.userId + '/search/' +title)
         }
-        function init() {
-            model.users = userService.findAllUsers(model.userId);
+        function init()
+        {
+            userService.findAllUsers(model.userId).then(
+                function (uIDs) {
+                    model.users = uIDs
+                }
+            );
+            userService.findUserById(model.userId).then(
+                function (user) {
+                    model.currentUser = user;
+                }
+            )
             // console.log(model.users);
         }
         init();
@@ -28,18 +38,36 @@
         function followUser(username)
         {
             if (typeof(model.userId) === 'undefined')
-                alert('Please login to bookmark.');
+                alert('Please login to follow this user.');
             else {
-                var follower = userService.findUserById(model.userId);
-                var leader = userService.findUserByUsername(username);
-                follower.follows.push(username);
-                leader.followedBy.push(follower.username);
-                userService
-                    .updateUser(model.userId, follower);
-                userService
-                    .updateUser(leader._id, leader);
-                alert("You are now following " + username);
-            }
+                userService.findUserById(model.userId).then(function (user) {
+                   var follower = user;
+                    follower.following.push(username);
+                    userService
+                        .updateUser(model.userId, follower);
+                    model.users.forEach(function (leader) {
+                        if (leader.username === username)
+                        {
+                            leader.followedBy.push(follower.username);
+                            userService
+                                    .updateUser(leader._id, leader);
+                        }
+                    })
+                    // userService.findUserByUsername(username).then(function (leader) {
+                    //     console.log(leader);
+                    //     leader.followedBy.push(follower.username);
+                    //     userService
+                    //         .updateUser(leader._id, leader);
+                    // });
+
+
+
+
+                    alert("You are now following " + username);
+                })
+                }
+
+
 
 
         }

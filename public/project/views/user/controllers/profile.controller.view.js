@@ -12,16 +12,22 @@
         model.deleteUser = deleteUser;
         model.logout = logout;
         model.redirect = redirect;
+        model.deleteBookmark = deleteBookmark;
+        model.unfollow = unfollow;
+
         function redirect(title) {
-            console.log(model.userId);
             if (typeof(model.userId) === 'undefined')
                 $location.url('/search/' + title);
             else
                 $location.url('/user/' + model.userId + '/search/' +title)
         }
-        userService
-            .findUserById(model.userId)
-            .then(renderUser, userError);
+        function init() {
+            userService
+                .findUserById(model.userId)
+                .then(renderUser, userError);
+        }
+
+        init();
 
         function deleteUser(user) {
             userService
@@ -40,6 +46,24 @@
                 })
         }
 
+        function deleteBookmark(title)
+        {
+            userService
+                .deleteBookmark(model.userId, title)
+                .then(function () {
+                    init();
+                    model.message = "Bookmark Deleted";
+                })
+        }
+
+        function unfollow(username) {
+            userService
+                .unfollow(model.userId, username)
+                .then(function () {
+                    init();
+                    model.message = "Bookmark Deleted";
+                })
+        }
         function renderUser (user) {
             model.user = user;
         }

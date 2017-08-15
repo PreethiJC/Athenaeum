@@ -6,7 +6,14 @@ body {
     padding-bottom: 40px;
     color: #5a5a5a;
 }
-.panel
+.navbar-custom{
+    color:white;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+.navbar-brand{
+    color:white;
+}
 .panel-heading {
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
@@ -25,7 +32,11 @@ body {
     left: 0;
     z-index: 20;
 }
-
+.custom-button {
+    /*white-space: normal !important;*/
+    height: 35px;
+    width: 50px;
+}
 /* Flip around the padding for proper display in narrow viewports */
 .navbar-wrapper > .container {
     padding-right: 0;
@@ -44,9 +55,7 @@ body {
 
 }
 
-.panel-heading{
-    background-color: white;
-}
+
 
 
 /* CUSTOMIZE THE CAROUSEL

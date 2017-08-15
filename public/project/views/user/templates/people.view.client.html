@@ -47,9 +47,10 @@
         <div class="container-fluid">
             <h1>People</h1>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="user in model.users">
-                    {{user.username}}
-                    <button class="btn btn-danger" ng-click="model.followUser(user.username)">Follow</button>
+                <li class="list-group-item" ng-repeat="user in model.users" style="height: 50px">
+                        {{user.username}}
+                        <button ng-if="model.currentUser.following.indexOf(user.username) === -1" class="btn btn-danger pull-right" ng-click="model.followUser(user.username)">Follow</button>
+                        <button ng-if="model.currentUser.following.indexOf(user.username) > -1" class="btn btn-success pull-right">Following</button>
                 </li>
             </ul>
             <!--<div class="row">-->
