@@ -14,7 +14,14 @@
         model.searchBook = searchBook;
         model.redirectSearch = redirectSearch;
         model.redirectPeople = redirectPeople;
+        model.redirectDetails = redirectDetails;
 
+        function redirectDetails(volId) {
+            if (typeof(model.userId) === 'undefined')
+                $location.url('/user/details/' + volId);
+            else
+                $location.url('/user/' + model.userId + '/details/'+ volId)
+        }
         function redirectPeople() {
             if (typeof(model.userId) === 'undefined')
                 $location.url('/user/people');

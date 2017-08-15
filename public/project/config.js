@@ -70,6 +70,11 @@
                 controller: 'detailsController',
                 controllerAs: 'model'
             })
+            .when('/user/details/:volumeId', {
+                templateUrl: 'views/user/templates/details.view.client.html',
+                controller: 'detailsController',
+                controllerAs: 'model'
+            })
             .when('/user/:userId/people/', {
                 templateUrl: 'views/user/templates/people.view.client.html',
                 controller: 'peopleController',
