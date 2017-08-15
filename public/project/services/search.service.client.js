@@ -13,7 +13,7 @@
         };
         return api;
         function searchBook(title) {
-            var url = "https://www.googleapis.com/books/v1/volumes?q=" + title + "&key=" + process.env.API_KEY;
+            var url = "https://www.googleapis.com/books/v1/volumes?q=" + title + "&key=AIzaSyCgSKEdri_DRhHgtj7_oSfPbNlcQC5odiE";
             return $http.get(url)
                 .then(function (response) {
                     // console.log(response.data);
